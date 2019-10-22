@@ -14,5 +14,7 @@ with open(sys.argv[2], 'r') as doc:
         new2line = newline.split(",")
         for character in removableChars:
             new2line[2]= new2line[2].replace(character,"")
+        new2line[1]= "'"+new2line[1]+"'"
+        new2line[2] = "'"+new2line[2].replace("\n","'\n")
         newline = ",".join(new2line)
         newdoc.write(newline)
