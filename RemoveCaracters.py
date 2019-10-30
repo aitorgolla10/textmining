@@ -7,14 +7,12 @@ with open(sys.argv[1], 'r') as doc:
         lerroGarbia = lerroa[1:-2].replace("'","")
         for char in lerroGarbia.split(','):
             removableChars.append(char)
-newdoc = open("FinalPreArfffData.txt", 'w+')
+newdoc = open("FinalPreArfffData2Atrib.txt", 'w+')
 with open(sys.argv[2], 'r') as doc:
     for lerroa in doc:
         newline = lerroa.replace("'","")
         new2line = newline.split(",")
         for character in removableChars:
             new2line[2]= new2line[2].replace(character,"")
-        new2line[1]= "'"+new2line[1]+"'"
-        new2line[2] = "'"+new2line[2].replace("\n","'\n")
-        newline = ",".join(new2line)
-        newdoc.write(newline)
+        newLine3 =new2line[0]+" "+new2line[1]+","+new2line[2]
+        newdoc.write(newLine3)
