@@ -1,24 +1,32 @@
 import pandas as pd
+import csv
 from distantziak import  Distantziak as distance
 
 
 
 class KMeans():
 
-    def kmeans(archivoCsv, k, distancia, archivoDestino):
+    def kmeans(k, distancia, archivoDestino):
 
-        centroides = k
-        data = pd.read_csv(archivoCsv)
-        print(data.loc[:, 'open_response'])  # Testuko zutabea bakarrik agertzeko
-        print(centroides)
-        print(distancia)
-        #with open(archivoCsv, "r") as doc:
-            #for lerro in doc:
-                #vector = lerro.split(",")[1:]
+        pertenencias = {}       # HashMap identificador --> cluster al que pertenece
+        vectores = {}
 
-                #for i in k:
+        with open('doc2vectrain.csv') as trainCsv:
+            data = csv.reader(trainCsv, delimiter=',')
+            for lerroa in data:
+                #print(' '.join(lerroa))
+                pertenencias[lerroa[0]] = 'cluster1'
+                vectores[lerroa[0]] = lerroa[1:]
 
-                    #distance.calcularDistancia(distancia)
+            distantzia = distance.coseno(vectores['1710 Child'],vectores['6063 Adult'])
+            print("Distancia entre los vectores -->")
+            print(distantzia)
+
+
+
+
+
+
 
 
 
