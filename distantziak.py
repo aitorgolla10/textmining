@@ -4,14 +4,14 @@ class Distantziak():
     def euclidean(vector1,vector2):         # Le asignamos el valor 0
         dist = 0
         for i in range(0,len(vector1)):
-            dist += (vector1[i] - vector2[i])**2
+            dist += (float(vector1[i]) - float(vector2[i]))**2
         distance = dist**(1/2)
         return  distance
 
     def manhattan(vector1, vector2):        # Le asignamos el valor 1
         dist = 0
         for i in range(0,len(vector1)):
-            dist += abs((vector1[i] - vector2[i]))
+            dist += abs((float(vector1[i]) - float(vector2[i])))
         #dist = vector1-vector2
         return  abs(dist)
 
@@ -22,12 +22,12 @@ class Distantziak():
         bat = 0
         bi = 0
         for i in range(0, len(vector1)):
-            batukari += (vector1[i]*vector2[i])
-            bat += vector1[i]**2
-            bi += vector2[i] ** 2
+            batukari += (float(vector1[i])*float(vector2[i]))
+            bat += float(vector1[i])**2
+            bi += float(vector2[i]) ** 2
 
-        bat = bat**(1/2)
-        bi = bi**(1/2)
+        bat = float(bat)**(1/2)
+        bi = float(bi)**(1/2)
         biderketa = bat*bi
         dist = batukari/biderketa
 
