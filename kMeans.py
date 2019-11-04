@@ -8,7 +8,7 @@ from distantziak import  Distantziak as distance
 
 class KMeans():
 
-    def kmeans(k, distancia, archivoDestino):
+    def kmeans(k, distanciaTipo):
 
         i = 0;
         j = 0;
@@ -41,19 +41,21 @@ class KMeans():
                 centroides.append(vectores[idCentroides[j]])            #Inicializar centroides
                 j = j+1
 
-            print(len(centroides))
+
             iteraciones = 0
 
-            while (iteraciones<5):
+            while (iteraciones<4):
                 id = 0
                 #COPIAR CENTROIDES NUEVOS EN CENTROIDES VIEJOS
+                if iteraciones!=0:
+                    centroides = centroidesNuevos
                 for v in vectoresSolos:
                         z = 0
                         distancia = 0
 
                         while z<k:
 
-                            distancia2 = distance.calcularDistancia(distance,1,centroides[z],v)
+                            distancia2 = distance.calcularDistancia(distance,distanciaTipo,centroides[z],v)
                             if (distancia2 < distancia or distancia==0):
                                 distancia = distancia2
                                 c = z
@@ -69,20 +71,36 @@ class KMeans():
                     centroidesNuevos[w] = distance.calcularMedia(distance,clustersTodos[w])
                     w = w+1
 
-                print(centroides)
-                print(centroidesNuevos)
+                print(pertenencias)
                 iteraciones = iteraciones+1
 
+            print("====================")
+            u = 0
+            while(u<k):
+                clusterZenb = u+1
+                print("CLUSTER " + str(clusterZenb) + ": " +str(len(clustersTodos[u]))+ " instancias")
+                u = u+1
+
+            instanciasTotales = 0
+            u = 0
+            while (u < k):
+                instanciasTotales = instanciasTotales + len(clustersTodos[u])
+                u = u+1
+
+            print("====================")
+            u = 0
+            while (u < k):
+
+                clusterZenb = u + 1
+                instanciasCluster = len(clustersTodos[u])
+                porcentaje = round((instanciasCluster/instanciasTotales)*100, 2)
+                print("CLUSTER " + str(clusterZenb) + ": %"+str(porcentaje))
+                u = u+1
 
 
 
 
 
-
-
-            #distantzia = distance.coseno(vectores['1710 Child'],vectores['6063 Adult'])
-            #print("Distancia entre los vectores -->")
-            #print(distantzia)
 
 
 

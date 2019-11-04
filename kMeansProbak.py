@@ -3,7 +3,10 @@ import csv
 import pandas as pd
 
 
-kMeans.kmeans(3, "euclidean", "eee")
+kMeans.kmeans(15, 2)    #kmeans(número de clusters, distancia tipo)
+                        # Distancia tipo: 0 --> euclidea
+                        #                 1 --> manhattan
+                        #                 2 --> coseno
 
     #data = pd.read_csv(csvFile)
     #data_top = data.head()      # Hasierako balioak agertzeko
