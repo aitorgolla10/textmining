@@ -32,6 +32,7 @@ class KMeans():
                 i = i+1
             centroidesNuevos = []
             clustersTodos = []
+
             while j<k:
                 cluster = []
                 clustersTodos.append(cluster)
@@ -40,7 +41,7 @@ class KMeans():
                 centroides.append(vectores[idCentroides[j]])            #Inicializar centroides
                 j = j+1
 
-
+            print(len(centroides))
             iteraciones = 0
 
             while (iteraciones<5):
