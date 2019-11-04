@@ -1,3 +1,5 @@
+import numpy as np
+
 
 class Distantziak():
 
@@ -55,5 +57,49 @@ class Distantziak():
             distantzia = -1
 
         return distantzia
+
+    def calcularMedia(self,v):
+
+        tamaño = len(v)
+
+        if (tamaño==0):
+            print("Este cluster no tiene ninguna instancia")
+            return -1
+        else:
+
+            suma = []
+            x = 0
+            for i in range(0,len(v[1])):
+                suma.append(0)
+            i = 0
+
+            while (i<tamaño):
+                suma = self.sumaDeVectores(suma,v[i])
+                i = i+1
+
+            while (x<len(suma)):
+                suma[x] = float(suma[x]) / float(tamaño)
+                x = x+1
+            return suma
+
+
+
+
+    def sumaDeVectores(v1, v2):
+
+        resultado = []
+        i = 0
+        tamaño = len(v1)
+        if tamaño==0:
+            print("Este cluster no tiene ninguna instancia")
+            return -1
+
+        while (i<tamaño):
+            resultado.append(float(v1[i]) + float(v2[i]))
+            i = i+1
+        return resultado
+
+
+
 
 
