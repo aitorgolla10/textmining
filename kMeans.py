@@ -1,4 +1,3 @@
-import pandas as pd
 import csv
 from numpy import random
 
@@ -10,14 +9,23 @@ class KMeans():
 
     def kmeans(k, distanciaTipo):
 
+        if k<1:
+            print("Incorrecto número de clusters")
+            return -1
+
+        if distanciaTipo>2:
+            print("Incorrecto tipo de distancia")
+            return -1
+
         i = 0;
         j = 0;
+
         pertenencias = {}       # HashMap identificador --> cluster al que pertenece
-        vectores = {}
-        identificadores = []
-        idCentroides = []
-        centroides = []
-        vectoresSolos = []
+        vectores = {}           # HashMap identificador --> vector
+        identificadores = []    # Vector con todos los identificadores
+        idCentroides = []       # Vector con los identificadores de los centroides
+        centroides = []         # Vectores de los centroides
+        vectoresSolos = []      # Todos los vectores de las instancias
 
         with open('doc2vectrain.csv') as trainCsv:
             data = csv.reader(trainCsv, delimiter=',')
@@ -44,11 +52,10 @@ class KMeans():
 
             iteraciones = 0
 
-            while (iteraciones<4):
+            while (iteraciones<8):
                 id = 0
-                #COPIAR CENTROIDES NUEVOS EN CENTROIDES VIEJOS
-                if iteraciones!=0:
-                    centroides = centroidesNuevos
+                if iteraciones>0:
+                    centroides = centroidesNuevos              #COPIAR CENTROIDES NUEVOS EN CENTROIDES VIEJOS
                 for v in vectoresSolos:
                         z = 0
                         distancia = 0
@@ -61,16 +68,14 @@ class KMeans():
                                 c = z
                             z = z+1
 
-                        pertenencias[identificadores[id]] = 'Cluster' + str(c+1)
+                        pertenencias[identificadores[id]] = 'Cluster ' + str(c+1)
                         id = id+1
                         clustersTodos[c].append(v)
 
                 w=0
                 while (w<k):                #Actualizar centroides calculando la media
-
                     centroidesNuevos[w] = distance.calcularMedia(distance,clustersTodos[w])
                     w = w+1
-
                 print(pertenencias)
                 iteraciones = iteraciones+1
 

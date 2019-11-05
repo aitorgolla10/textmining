@@ -3,7 +3,7 @@ import csv
 import pandas as pd
 
 
-kMeans.kmeans(15, 2)    #kmeans(número de clusters, distancia tipo)
+kMeans.kmeans(3, 2)    #  kmeans(número de clusters, distancia tipo)
                         # Distancia tipo: 0 --> euclidea
                         #                 1 --> manhattan
                         #                 2 --> coseno
