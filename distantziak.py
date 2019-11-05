@@ -54,7 +54,7 @@ class Distantziak():
         else:
 
             print("No has introducido bien la distancia")
-            distantzia = -1
+            exit(0)
 
         return distantzia
 

@@ -10,6 +10,9 @@ class KMeans():
 
     def kmeans(file,k, distanciaTipo):
 
+        if (k<1):
+            print("Has introducido mal el número de clusters")
+            exit(0)
         i = 0;
         j = 0;
         pertenencias = {}       # HashMap identificador --> cluster al que pertenece
@@ -44,7 +47,7 @@ class KMeans():
 
             iteraciones = 0
             cambio = 999
-            while (iteraciones<10 and centroides!=centroidesNuevos): #aldaketa < 0.05
+            while (iteraciones<20 and cambio>0.015): #cambio > 0.05
                 id = 0
                 j = 0
                 while j < k:
@@ -57,6 +60,7 @@ class KMeans():
                     for i in range(len(centroidesNuevos)):
                         cambio += distance.calcularDistancia(distance,distanciaTipo,centroidesNuevos[i], centroides[i])
                     centroides = centroidesNuevos.copy()
+            
                 for v in vectoresSolos:
                         z = 0
                         distancia = 0
