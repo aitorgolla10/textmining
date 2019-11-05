@@ -41,7 +41,7 @@ class KMeans():
                 j = j+1
 
             iteraciones = 0
-            aldaketa = 999
+            cambio = 999
             while (iteraciones<10 and centroides!=centroidesNuevos): #aldaketa < 0.05
                 id = 0
                 j = 0
@@ -70,13 +70,15 @@ class KMeans():
                         pertenencias[identificadores[id]] = 'Cluster' + str(c+1)
                         id = id+1
                         clustersTodos[c].append(v)
-                print(pertenencias)
+
                 w=0
                 while (w<k):                #Actualizar centroides calculando la media
-
-                    centroidesNuevos[w] = distance.calcularMedia(distance,clustersTodos[w])
-                    w = w+1
-
+                    if(len(clustersTodos[w])>0):
+                        centroidesNuevos[w] = distance.calcularMedia(distance,clustersTodos[w])
+                        w = w+1
+                    else: # Para clusters vacíos
+                        centroideLejano = distance.instanciaMasLejana(distance,distanciaTipo,vectoresSolos,centroides)
+                        centroidesNuevos[w] = centroideLejano
                 #print(pertenencias)
                 iteraciones = iteraciones+1
 

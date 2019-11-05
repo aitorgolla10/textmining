@@ -99,7 +99,21 @@ class Distantziak():
             i = i+1
         return resultado
 
+    def instanciaMasLejana(self,distanciaTipo,vectoresSolos,centroides):
+        distanciaTotal = 0
+        distanciaNueva = 0
+        numeroDeCentroides = len(centroides)
+        instancia = []
+        for v in vectoresSolos:
 
+            for c in range(numeroDeCentroides):
+                distanciaNueva += self.calcularDistancia(self,distanciaTipo,v,centroides[c])
+
+                if distanciaNueva >= distanciaTotal:
+                    distanciaTotal = distanciaNueva
+                    instancia = v.copy()
+
+        return instancia
 
 
 
