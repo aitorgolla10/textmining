@@ -56,7 +56,7 @@ class KMeans():
                         while z<k:
 
                             distancia2 = distance.calcularDistancia(distance,distanciaTipo,centroides[z],v)
-                            if (distancia2 < distancia or distancia==0):
+                            if (distancia2 <= distancia ):
                                 distancia = distancia2
                                 c = z
                             z = z+1
