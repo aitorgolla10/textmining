@@ -1,14 +1,14 @@
 import pandas as pd
 import csv
 from numpy import random
-
+import sys
 from distantziak import  Distantziak as distance
 
 
 
 class KMeans():
 
-    def kmeans(k, distanciaTipo):
+    def kmeans(file,k, distanciaTipo):
 
         i = 0;
         j = 0;
@@ -19,7 +19,7 @@ class KMeans():
         centroides = []
         vectoresSolos = []
 
-        with open('doc2vectrain.csv') as trainCsv:
+        with open(file) as trainCsv:
             data = csv.reader(trainCsv, delimiter=',')
 
             for lerroa in data:
@@ -44,7 +44,7 @@ class KMeans():
 
             iteraciones = 0
 
-            while (iteraciones<4):
+            while (iteraciones<100):
                 id = 0
                 #COPIAR CENTROIDES NUEVOS EN CENTROIDES VIEJOS
                 if iteraciones!=0:
@@ -71,14 +71,14 @@ class KMeans():
                     centroidesNuevos[w] = distance.calcularMedia(distance,clustersTodos[w])
                     w = w+1
 
-                print(pertenencias)
+                #print(pertenencias)
                 iteraciones = iteraciones+1
 
-            print("====================")
+            #print("====================")
             u = 0
             while(u<k):
                 clusterZenb = u+1
-                print("CLUSTER " + str(clusterZenb) + ": " +str(len(clustersTodos[u]))+ " instancias")
+                #print("CLUSTER " + str(clusterZenb) + ": " +str(len(clustersTodos[u]))+ " instancias")
                 u = u+1
 
             instanciasTotales = 0
@@ -87,7 +87,7 @@ class KMeans():
                 instanciasTotales = instanciasTotales + len(clustersTodos[u])
                 u = u+1
 
-            print("====================")
+            #print("====================")
             u = 0
             while (u < k):
 
@@ -96,7 +96,12 @@ class KMeans():
                 porcentaje = round((instanciasCluster/instanciasTotales)*100, 2)
                 print("CLUSTER " + str(clusterZenb) + ": %"+str(porcentaje))
                 u = u+1
-
+            clusterModel = open(str(k)+"clustersWith"+str(distanciaTipo)+"model",'w+')
+            clusterModel.write(str(k)+'\n'+str(distanciaTipo)+'\n')
+            for centroid in centroides:
+                clusterModel.write(str(centroid)+'\n')
+if __name__ == "__main__":
+    KMeans.kmeans(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]))
 
 
 
