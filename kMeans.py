@@ -44,11 +44,18 @@ class KMeans():
 
             iteraciones = 0
 
-            while (iteraciones<100):
+            while (iteraciones<10):
                 id = 0
+                j = 0
+                while j < k:
+                    clustersTodos[j].clear()
+                    j = j+1
+
                 #COPIAR CENTROIDES NUEVOS EN CENTROIDES VIEJOS
                 if iteraciones!=0:
+                    print(len(centroides))
                     centroides = centroidesNuevos
+                    print(centroides)
                 for v in vectoresSolos:
                         z = 0
                         distancia = 0
@@ -71,6 +78,7 @@ class KMeans():
                     centroidesNuevos[w] = distance.calcularMedia(distance,clustersTodos[w])
                     w = w+1
 
+                print("-->" + str(centroidesNuevos))
                 #print(pertenencias)
                 iteraciones = iteraciones+1
 
@@ -78,7 +86,7 @@ class KMeans():
             u = 0
             while(u<k):
                 clusterZenb = u+1
-                #print("CLUSTER " + str(clusterZenb) + ": " +str(len(clustersTodos[u]))+ " instancias")
+                print("CLUSTER " + str(clusterZenb) + ": " +str(len(clustersTodos[u]))+ " instancias")
                 u = u+1
 
             instanciasTotales = 0
@@ -100,6 +108,7 @@ class KMeans():
             clusterModel.write(str(k)+'\n'+str(distanciaTipo)+'\n')
             for centroid in centroides:
                 clusterModel.write(str(centroid)+'\n')
+
 if __name__ == "__main__":
     KMeans.kmeans(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]))
 
