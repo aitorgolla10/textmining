@@ -1,10 +1,9 @@
 import pandas as pd
+
 import csv
 from numpy import random
 import sys
 from distantziak import  Distantziak as distance
-
-
 
 class KMeans():
 
@@ -40,7 +39,6 @@ class KMeans():
                 idCentroides.append(random.choice(identificadores))     #Escoger centroides aleatorios
                 centroides.append(vectores[idCentroides[j]])            #Inicializar centroides
                 j = j+1
-
 
             iteraciones = 0
             aldaketa = 999
