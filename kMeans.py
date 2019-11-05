@@ -1,33 +1,25 @@
+import pandas as pd
 import csv
 from numpy import random
-
+import sys
 from distantziak import  Distantziak as distance
 
 
 
 class KMeans():
 
-    def kmeans(k, distanciaTipo):
-
-        if k<1:
-            print("Incorrecto número de clusters")
-            return -1
-
-        if distanciaTipo>2:
-            print("Incorrecto tipo de distancia")
-            return -1
+    def kmeans(file,k, distanciaTipo):
 
         i = 0;
         j = 0;
-
         pertenencias = {}       # HashMap identificador --> cluster al que pertenece
-        vectores = {}           # HashMap identificador --> vector
-        identificadores = []    # Vector con todos los identificadores
-        idCentroides = []       # Vector con los identificadores de los centroides
-        centroides = []         # Vectores de los centroides
-        vectoresSolos = []      # Todos los vectores de las instancias
+        vectores = {}
+        identificadores = []
+        idCentroides = []
+        centroides = []
+        vectoresSolos = []
 
-        with open('doc2vectrain.csv') as trainCsv:
+        with open(file) as trainCsv:
             data = csv.reader(trainCsv, delimiter=',')
 
             for lerroa in data:
@@ -52,10 +44,11 @@ class KMeans():
 
             iteraciones = 0
 
-            while (iteraciones<8):
+            while (iteraciones<100):
                 id = 0
-                if iteraciones>0:
-                    centroides = centroidesNuevos              #COPIAR CENTROIDES NUEVOS EN CENTROIDES VIEJOS
+                #COPIAR CENTROIDES NUEVOS EN CENTROIDES VIEJOS
+                if iteraciones!=0:
+                    centroides = centroidesNuevos
                 for v in vectoresSolos:
                         z = 0
                         distancia = 0
@@ -68,22 +61,24 @@ class KMeans():
                                 c = z
                             z = z+1
 
-                        pertenencias[identificadores[id]] = 'Cluster ' + str(c+1)
+                        pertenencias[identificadores[id]] = 'Cluster' + str(c+1)
                         id = id+1
                         clustersTodos[c].append(v)
 
                 w=0
                 while (w<k):                #Actualizar centroides calculando la media
+
                     centroidesNuevos[w] = distance.calcularMedia(distance,clustersTodos[w])
                     w = w+1
-                print(pertenencias)
+
+                #print(pertenencias)
                 iteraciones = iteraciones+1
 
-            print("====================")
+            #print("====================")
             u = 0
             while(u<k):
                 clusterZenb = u+1
-                print("CLUSTER " + str(clusterZenb) + ": " +str(len(clustersTodos[u]))+ " instancias")
+                #print("CLUSTER " + str(clusterZenb) + ": " +str(len(clustersTodos[u]))+ " instancias")
                 u = u+1
 
             instanciasTotales = 0
@@ -92,7 +87,7 @@ class KMeans():
                 instanciasTotales = instanciasTotales + len(clustersTodos[u])
                 u = u+1
 
-            print("====================")
+            #print("====================")
             u = 0
             while (u < k):
 
@@ -101,7 +96,12 @@ class KMeans():
                 porcentaje = round((instanciasCluster/instanciasTotales)*100, 2)
                 print("CLUSTER " + str(clusterZenb) + ": %"+str(porcentaje))
                 u = u+1
-
+            clusterModel = open(str(k)+"clustersWith"+str(distanciaTipo)+"model",'w+')
+            clusterModel.write(str(k)+'\n'+str(distanciaTipo)+'\n')
+            for centroid in centroides:
+                clusterModel.write(str(centroid)+'\n')
+if __name__ == "__main__":
+    KMeans.kmeans(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]))
 
 
 
