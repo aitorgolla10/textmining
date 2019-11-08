@@ -26,7 +26,6 @@ with open(sys.argv[3]) as trainCsv:
     for lerroa in data:
         vectorData[lerroa[0]] = lerroa[1:]
         vectores.append(lerroa[0])
-    print(vectores)
     for v in vectores:
         z = 0
         distancia = 0
@@ -41,9 +40,6 @@ with open(sys.argv[3]) as trainCsv:
             z = z + 1
 
         pertenencias[c].append(v)
-
-    print(len(clusterCentroids))
-    print(len(pertenencias))
     newPetenencias = np.array(pertenencias)
     daviesVowin = 0
     for i in range(k):
@@ -68,8 +64,8 @@ with open(sys.argv[3]) as trainCsv:
         maxValue = max(valuesToMax)
         daviesVowin += maxValue
     daviesVowin = daviesVowin/k
-    doc.write(sys.argv[2]+","+str(daviesVowin))
-    print(str(daviesVowin))
+    doc.write(sys.argv[2]+","+str(daviesVowin)+"\n")
+    print("daciesVowin value:  "+str(daviesVowin))
 
         #value = sklearn.metrics.davies_bouldin_score(nsamples2,clusterCentroids)
     #doc.write(sys.argv[2]+","+str(value))
