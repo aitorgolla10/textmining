@@ -8,7 +8,6 @@ cluster = open(sys.argv[2],'r') #cluster model
 vectores =[]
 with open(sys.argv[3]) as trainCsv:
     data = csv.reader(trainCsv, delimiter=',')
-    print(data)
     clust = cluster.readlines()
     k = int(clust[0])
     dist = int(clust[1])
