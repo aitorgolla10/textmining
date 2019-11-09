@@ -60,7 +60,7 @@ class KMeans():
                     for i in range(len(centroidesNuevos)):
                         cambio += distance.calcularDistancia(distance,distanciaTipo,centroidesNuevos[i], centroides[i])
                     centroides = centroidesNuevos.copy()
-            
+
                 for v in vectoresSolos:
                         z = 0
                         distancia = 0
