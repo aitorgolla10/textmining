@@ -77,6 +77,7 @@ class KMeans():
                         centroidesNuevos[w] = distance.calcularMedia(distance,clustersTodos[w])
                         w = w+1
                     else: # Para clusters vacíos
+                        print("Estoy en esta vacaneria")
                         centroideLejano = distance.instanciaMasLejana(distance,distanciaTipo,vectoresSolos,centroides)
                         centroidesNuevos[w] = centroideLejano
                 #print(pertenencias)
