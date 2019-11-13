@@ -7,6 +7,7 @@ import numpy as np
 from distantziak import  Distantziak as distance
 import sys
 import random
+import matplotlib.patches as mpatches
 
 class Visualizacion():
 
@@ -92,14 +93,13 @@ class Visualizacion():
 
                 pca = PCA(n_components=2)
                 principalComponents = pca.fit_transform(x)
-                principalDf = pd.DataFrame(data=principalComponents, columns=['Columna 1', 'Columna 2'], index=index)
+                principalDf = pd.DataFrame(data=principalComponents, columns=['Atributo 1', 'Atributo 2'], index=index)
                 print(principalDf.head(5))
-                print(principalDf.loc['6063 Adult'])
 
                 fig = plt.figure(figsize=(8, 8))
                 ax = fig.add_subplot(1, 1, 1)
-                ax.set_xlabel('Columna 1', fontsize=15)
-                ax.set_ylabel('Columna 2', fontsize=15)
+                ax.set_xlabel('Atributo 1', fontsize=15)
+                ax.set_ylabel('Atributo 2', fontsize=15)
                 ax.set_title('Clustering documentos', fontsize=20)
 
                 tamaño = 20
@@ -115,18 +115,22 @@ class Visualizacion():
                     instanciaDelCluster = 0
                     while (instanciaDelCluster < cantidadInstancias[cluster]):
                         cantidadInstancias[c]
-                        x = principalDf.loc[index[contador],'Columna 1']
-                        y = principalDf.loc[index[contador], 'Columna 2']
+                        x = principalDf.loc[index[contador],'Atributo 1']
+                        y = principalDf.loc[index[contador], 'Atributo 2']
                         plt.scatter(x,y,s=tamaño,color=color[cluster])
                         #plt.annotate(index[contador],(x,y))
                         instanciaDelCluster = instanciaDelCluster +1
                         contador = contador+1
-                    legend.append(color[cluster])
+                    #legend.append("Cluster " + str(cluster+1))
                     cluster = cluster+1
-                i=0
+                patch = []
+                z = 0
+                while (z < colores):
+                    etiqueta = mpatches.Patch(color=color[z], label='Cluster ' + str(z+1))
+                    patch.append(etiqueta)
+                    z = z+1
+                plt.legend(handles=patch)
 
-
-                #plt.legend(legend)
                 plt.show()
 
 
