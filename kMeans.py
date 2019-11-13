@@ -3,6 +3,7 @@ import csv
 from numpy import random
 import sys
 from distantziak import  Distantziak as distance
+from visualizacion import Visualizacion as visualizacion
 
 
 
@@ -114,6 +115,8 @@ class KMeans():
             clusterModel.write(str(k)+'\n'+str(distanciaTipo)+'\n')
             for centroid in centroides:
                 clusterModel.write(str(centroid)+'\n')
+
+            visualizacion.visualizarClusters(visualizacion,clustersTodos)
 
 if __name__ == "__main__":
     KMeans.kmeans(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]))

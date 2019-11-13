@@ -12,7 +12,12 @@ with open(sys.argv[3]) as trainCsv:
     k = int(clust[0])
     dist = int(clust[1])
     centroid = []
-    pertenencias =  [[]]*k
+    pertenencias = []
+    j = 0
+    while j < k:
+        cluster = []
+        pertenencias.append(cluster)
+        j = j + 1
     distancias ={}
     vectorData = {}
     #cargar centroides
