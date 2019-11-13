@@ -62,7 +62,7 @@ class Visualizacion():
                 writer = csv.writer(csvFile)
                 i = 0
                 cantidadInstancias = []
-                while (i<len(pertenencias)):
+                while (i<len(pertenencias)):                   # Guardar la cantidad de instancias de cada cluster
                     writer.writerows(pertenencias[i])
                     cantidadInstancias.append(len(pertenencias[i]))
                     i = i+1
@@ -75,15 +75,16 @@ class Visualizacion():
 
                 index = []
                 i = 0
-                while (i < len(pertenencias)): #Conseguir los identificadores de los documentos ordenados por clusters
+                while (i < len(pertenencias)):          #Conseguir los identificadores de los documentos ordenados por clusters
                     j = 0
                     while (j < len(pertenencias[i])):
                         vector = pertenencias[i][j]
                         for linea in vectorData:
-                            if (vectorData[linea] == vector):
-                                index.append(linea)
+                            if (vectorData[linea] == vector):       # Conseguir el identificador del vector
+                                index.append(linea)                 # Guardar identificador
                         j = j + 1
                     i = i + 1
+
 
                 df = pd.read_csv("visualizacion.csv", names=columnas)
                 features = columnas
@@ -91,47 +92,51 @@ class Visualizacion():
                 x = StandardScaler().fit_transform(x)
                 pd.DataFrame(data=x, columns=features).head()
 
-                pca = PCA(n_components=2)
+                pca = PCA(n_components=2)                           # Conversión a 2 atributos para visualización 2D
                 principalComponents = pca.fit_transform(x)
                 principalDf = pd.DataFrame(data=principalComponents, columns=['Atributo 1', 'Atributo 2'], index=index)
-                print(principalDf.head(5))
+
 
                 fig = plt.figure(figsize=(8, 8))
                 ax = fig.add_subplot(1, 1, 1)
                 ax.set_xlabel('Atributo 1', fontsize=15)
                 ax.set_ylabel('Atributo 2', fontsize=15)
-                ax.set_title('Clustering documentos', fontsize=20)
+                ax.set_title('Clustering de documentos (KMeans)', fontsize=20)
 
-                tamaño = 20
+                tamaño = 20             # Tamaño del punto
                 contador = 0
                 cluster = 0
-                colores = k
+                colores = k             # Misma cantidad de colores y de clusters
 
                 color = ["#" + ''.join([random.choice('0123456789ABCDEF') for j in range(6)])
                          for i in range(colores)]
 
                 legend = []
-                while contador<len(index):
+                while contador<len(index):  # Meter un punto en el gráfico por cada documento (instancia)
                     instanciaDelCluster = 0
-                    while (instanciaDelCluster < cantidadInstancias[cluster]):
-                        cantidadInstancias[c]
+                    while (instanciaDelCluster < cantidadInstancias[cluster]): # Recorrer las del mismo cluster para asignar
+                        cantidadInstancias[c]                                   # mismo color
                         x = principalDf.loc[index[contador],'Atributo 1']
                         y = principalDf.loc[index[contador], 'Atributo 2']
-                        plt.scatter(x,y,s=tamaño,color=color[cluster])
-                        #plt.annotate(index[contador],(x,y))
+                        plt.scatter(x,y,s=tamaño,color=color[cluster])          # Añadir el punto con sus dos atributos y color
+                        #plt.annotate(index[contador],(x,y), size=4)
                         instanciaDelCluster = instanciaDelCluster +1
                         contador = contador+1
-                    #legend.append("Cluster " + str(cluster+1))
                     cluster = cluster+1
+
+                # Personalizar las legend (cuadrado informativo) cada cluster con su color
                 patch = []
                 z = 0
                 while (z < colores):
                     etiqueta = mpatches.Patch(color=color[z], label='Cluster ' + str(z+1))
                     patch.append(etiqueta)
                     z = z+1
+
                 plt.legend(handles=patch)
 
                 plt.show()
+
+
 
 
 
