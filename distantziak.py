@@ -36,18 +36,18 @@ class Distantziak():
         return dist
 
 
-    def calcularDistancia(self,distantzia, vector1, vector2):
+    def calcularDistancia(self,distantzia, vector1, vector2): # Recibe los 2 vectores y el tipo de distancia para el cálculo
 
-        if (distantzia == 0):
+        if (distantzia == 0):   #Euclidiana
 
             distantzia = self.euclidean(vector1,vector2)
 
-        elif (distantzia == 1):
+        elif (distantzia == 1): #Manhattan
 
             distantzia = self.manhattan(vector1, vector2)
 
 
-        elif (distantzia == 2):
+        elif (distantzia == 2): #Coseno
 
             distantzia = self.coseno(vector1, vector2)
 
@@ -99,17 +99,17 @@ class Distantziak():
             i = i+1
         return resultado
 
-    def instanciaMasLejana(self,distanciaTipo,vectoresSolos,centroides):
+    def instanciaMasLejana(self,distanciaTipo,vectoresSolos,centroides):    # Encontrar la instancia más lejana para añadir a cluster vacío
         distanciaTotal = 0
         distanciaNueva = 0
         numeroDeCentroides = len(centroides)
         instancia = []
-        for v in vectoresSolos:
+        for v in vectoresSolos: # Recorrer todas las instancias
 
             for c in range(numeroDeCentroides):
-                distanciaNueva += self.calcularDistancia(self,distanciaTipo,v,centroides[c])
+                distanciaNueva += self.calcularDistancia(self,distanciaTipo,v,centroides[c])    #Distancia a los 3 centroides
 
-                if distanciaNueva >= distanciaTotal:
+                if distanciaNueva >= distanciaTotal:    # Escoger la instancia con la distancia media más corta
                     distanciaTotal = distanciaNueva
                     instancia = v.copy()
 
