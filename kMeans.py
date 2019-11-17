@@ -118,7 +118,16 @@ class KMeans():
             visualizacion.visualizarClusters(visualizacion,clustersTodos)
 
 if __name__ == "__main__":
-    KMeans.kmeans(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]))
+    if len(sys.argv) == 4:
+        KMeans.kmeans(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]))
+    else:
+        print("La cantidad de atributos es incorrecta.\n" +
+              "Este programa genera un modelo de clustering\n" +
+              "Paramentros:\n" +
+              "1.- path a los datos de entrenamiento.\n" +
+              "2.-cantidad de clusters deseados\n" +
+              "3.-Tipo de distancia a utilizar (0 Euclidea, 1 Manhattan,2 Coseno)")
+
 
 
 

@@ -7,7 +7,7 @@ with open(sys.argv[1], 'r') as doc:
         lerroGarbia = lerroa[1:-2].replace("'","")
         for char in lerroGarbia.split(','):
             removableChars.append(char)
-newdoc = open("FinalPreArfffData2Atrib.txt", 'w+')
+newdoc = open("FinalPreArfffrawData2Atrib.txt", 'w+')
 with open(sys.argv[2], 'r') as doc:
     for lerroa in doc:
         newline = lerroa.replace("'","")
