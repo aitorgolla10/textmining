@@ -136,11 +136,32 @@ class Visualizacion():
 
                 plt.show()
 
+                # IMPRIMIR IDENTIFICADORES POR CLUSTER PARA POSTERIORES COMPARACIONES
+
+                contador = 0
+                j = 0
+                while contador<len(index):
+                    i = 0
+                    clusterCantidad = cantidadInstancias[j]
+                    print(" ")
+                    print("================")
+                    print("CLUSTER " + str(j+1))
+                    print("================")
+                    while i < clusterCantidad:
+                        print(index[contador] + ", " , end=' ')
+                        contador = contador +1
+                        i = i+1
+                    j = j+1
 
 
 
 
 
+
+# Para ejecutar la visualización 2 argumentos: --> 1: modelo del clustering (KclustersWithXmodel)
+#                                              --> 2: conjunto de entrenamiento (doc2vectrain.csv)
+
+# Ejemplo: python visualizacion.py 10clustersWith0model doc2vectrain.csv
 
 
 if __name__ == "__main__":

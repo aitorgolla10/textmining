@@ -60,9 +60,9 @@ class Distantziak():
 
     def calcularMedia(self,v):
 
-        tamaño = len(v)
+        tamaño = len(v)             # Tamaño del cluster
 
-        if (tamaño==0):
+        if (tamaño==0):             # Caso de cluster vacío
             print("Este cluster no tiene ninguna instancia")
             return -1
         else:
@@ -70,15 +70,15 @@ class Distantziak():
             suma = []
             x = 0
             for i in range(0,len(v[1])):
-                suma.append(0)
+                suma.append(0)                              # Inicializar vector vacío
             i = 0
 
             while (i<tamaño):
-                suma = self.sumaDeVectores(suma,v[i])
+                suma = self.sumaDeVectores(suma,v[i])       # Suma de todos los vectores del cluster
                 i = i+1
 
             while (x<len(suma)):
-                suma[x] = float(suma[x]) / float(tamaño)
+                suma[x] = float(suma[x]) / float(tamaño)    # Dividir la suma entre la cantidad de vectores (calcular la media)
                 x = x+1
             return suma
 
