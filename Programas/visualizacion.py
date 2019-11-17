@@ -165,12 +165,5 @@ class Visualizacion():
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 3:
-        Visualizacion.visualizarClusters(sys.argv[1], sys.argv[2])
-    else:
-        print("La cantidad de atributos es incorrecta.\n" +
-              "Este programa genera un modelo de clustering\n" +
-              "Paramentros:\n" +
-              "1.-path al modelo .\n" +
-              "2.-path a los datos de a visualizar")
+    Visualizacion.visualizarClusters(sys.argv[1],sys.argv[2])
 
